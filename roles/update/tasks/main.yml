@@ -1,0 +1,27 @@
+---  
+     - name: 'Instalando repositorio epel-release'
+       yum: 
+         name: epel-release 
+         state: latest 
+       become: yes
+    
+     - name: 'Atualizando todos os pacotes do  CentOS'
+       yum: 
+         name: '*' 
+         state: latest
+
+     - name: 'Desativando o SELinux'
+       selinux:
+         policy: targeted
+         state: disabled        
+
+     - name: 'Reiniciando o sistema depois das atualizaçôes'
+       reboot:
+
+     - name: 'Pacotes para descompactar o arquivo do WordPress latest.tar.gz'
+       yum:
+         name:
+         - unzip
+         - tar
+         state: present
+ 

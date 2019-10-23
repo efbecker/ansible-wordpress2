@@ -1,0 +1,28 @@
+---
+     - name: 'Instalando o Apache'
+       yum:
+         name: httpd
+         state: latest
+
+     - name: 'Habilitando o serviço do Apache na inicialização do sistema'
+       service: 
+         name: httpd 
+         state: started 
+         enabled: true
+
+     - name: 'Instalando pacotes necessários do PHP'
+       yum:
+         name:
+         - php
+         - php-gd
+         - python3-PyMySQL
+         - php-mysqlnd
+         state: present
+
+     - name: 'Copiando arquivo de configuração de VirtualHosts para o WordPress'
+       copy:
+         src: 'wp.conf'
+         dest: '/etc/httpd/conf.d/'
+       become: yes
+       notify:
+        - restart httpd

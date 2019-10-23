@@ -1,0 +1,28 @@
+---
+     - name: 'Instalando o MySQL e PyMySQL'
+       yum:
+         name:
+         - mysql-server
+         - python3-PyMySQL
+        
+     - name: 'Habilitando o serviço do MySQL na inicialização do sistema'
+       service: 
+         name: mysqld 
+         state: started 
+         enabled: true
+
+     - name: 'Criando o banco Wordpress no MySQL'
+       mysql_db:
+         login_user: root
+         login_password: ''
+         name: wordpress
+         state: present
+
+     - name: 'Criando o usuario wp_admin no MySQL para acesso ao banco Wordpress'
+       mysql_user:
+         login_user: root
+         login_password:
+         name: wp_admin
+         password: teste12345
+         priv: '*.*:ALL'
+         state: present

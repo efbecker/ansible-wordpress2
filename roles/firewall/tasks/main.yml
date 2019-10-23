@@ -1,0 +1,12 @@
+---
+     - name: 'Liberando porta 80 no Firewall' 
+       firewalld:
+         service: http
+         permanent: yes
+         state: enabled
+
+     - name: 'Restartando o  serviço do Firewalld'
+       service:
+         name: firewalld
+         state: restarted
+
