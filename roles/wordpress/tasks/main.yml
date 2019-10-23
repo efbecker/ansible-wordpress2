@@ -21,20 +21,20 @@
 
      - name: 'Copiando arquivo de exemplo para configuração do Wordpress'
        copy:
-         src: /var/www/html/wordpress/wp-config-sample.php
-         dest: /var/www/html/wordpress/wp-config.php
+         src: "{{ wp_installation_dir}}/wp-config-sample.php"
+         dest: "{{ wp_installation_dir}}/wp-config.php"
          remote_src: yes
        become: yes
 
      - name: 'Configurando o wp-config para acessar o banco de dados Wordpress'     
        replace:
-         path: '/var/www/html/wordpress/wp-config.php'
+         path: "{{ wp_installation_dir}}/wp-config.php"
          regexp: "{{ item.regex }}"
          replace: "{{ item.value }}"
          backup: yes
        with_items:
-         - { regex: 'database_name_here', value: 'wordpress'}
-         - { regex: 'username_here', value: 'wp_admin'}
-         - { regex: 'password_here', value: 'teste12345'}
+         - { regex: 'database_name_here', value: "{{ wp_db_name }}"}
+         - { regex: 'username_here', value: "{{ wp_username }}"}
+         - { regex: 'password_here', value: "{{ wp_user_password }}"}
        become: yes
 

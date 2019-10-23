@@ -15,14 +15,14 @@
        mysql_db:
          login_user: root
          login_password: ''
-         name: wordpress
+         name: "{{ wp_db_name }}"
          state: present
 
      - name: 'Criando o usuario wp_admin no MySQL para acesso ao banco Wordpress'
        mysql_user:
          login_user: root
          login_password:
-         name: wp_admin
-         password: teste12345
-         priv: '*.*:ALL'
+         name: "{{ wp_username }}"
+         password: "{{ wp_user_password }}"
+         priv: "{{ wp_db_name }}.*:ALL"
          state: present
