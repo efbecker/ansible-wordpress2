@@ -2,4 +2,4 @@
 wp_username: wp_admin
 wp_user_password: 12345678
 wp_db_name: wordpress
-wp_installation_dir: '/var/www/wordpress'
+wp_installation_dir: '/var/www/html/wordpress'
